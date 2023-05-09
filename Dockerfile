@@ -4,7 +4,7 @@ RUN mkdir -p /caddydir/data && \
     chmod -R 700 /caddydir
 ENV GO111MODULE=on \
     CGO_ENABLED=0
-RUN go install github.com/caddyserver/xcaddy/cmd/xcaddy
+RUN go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
 WORKDIR /caddy
 ARG PLUGINS=
 RUN for plugin in $(echo $PLUGINS | tr "," " "); do withFlags="$withFlags --with $plugin"; done && \
