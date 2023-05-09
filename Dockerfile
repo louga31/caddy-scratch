@@ -9,7 +9,6 @@ FROM caddy:alpine
 ENV HOME=/caddydir \
     CADDYPATH=/caddydir/data \
     TZ=Europe/Paris
-COPY --chown=1000 /caddydir /caddydir
 VOLUME ["/caddydir"]
 ENTRYPOINT ["/caddy"]
 USER 1000
