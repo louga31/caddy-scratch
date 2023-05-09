@@ -10,7 +10,6 @@ ENV HOME=/caddydir \
     CADDYPATH=/caddydir/data \
     TZ=Europe/Paris
 VOLUME ["/caddydir"]
-ENTRYPOINT ["/caddy"]
 USER 1000
 # see https://caddyserver.com/docs/cli
 CMD ["run","--config","/caddydir/Caddyfile"]
