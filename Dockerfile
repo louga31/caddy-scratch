@@ -5,5 +5,6 @@ RUN for plugin in $(echo $PLUGINS | tr "," " "); do withFlags="$withFlags --with
     xcaddy build latest ${withFlags}
 
 FROM caddy:alpine 
-
+RUN apk add --update-cache \
+    jq
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
