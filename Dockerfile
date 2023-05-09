@@ -6,6 +6,4 @@ RUN for plugin in $(echo $PLUGINS | tr "," " "); do withFlags="$withFlags --with
 
 FROM caddy:alpine 
 
-RUN apk add jq
-
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
