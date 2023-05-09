@@ -8,15 +8,13 @@ RUN mkdir -p /caddydir/data && \
 ENV GO111MODULE=on \
     CGO_ENABLED=0
 RUN go get github.com/caddyserver/xcaddy/cmd/xcaddy
-ARG CADDY_VERSION=v2.4.1
 WORKDIR /caddy
 ARG PLUGINS=
 RUN for plugin in $(echo $PLUGINS | tr "," " "); do withFlags="$withFlags --with $plugin"; done && \
-    xcaddy build ${CADDY_VERSION} ${withFlags}
+    xcaddy build latest ${withFlags}
 
 FROM scratch
 ARG VERSION
-ARG CADDY_VERSION
 ARG CREATED
 ARG COMMIT
 LABEL \
@@ -28,7 +26,7 @@ LABEL \
     org.opencontainers.image.documentation="https://github.com/qdm12/caddy-scratch/blob/master/README.md" \
     org.opencontainers.image.source="https://github.com/qdm12/caddy-scratch" \
     org.opencontainers.image.title="caddy-scratch" \
-    org.opencontainers.image.description="Caddy server ${CADDY_VERSION} on Alpine"
+    org.opencontainers.image.description="Caddy server on Alpine"
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 EXPOSE 8080 8443 2015
